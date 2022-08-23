@@ -17,6 +17,9 @@ class MemberJpaRepositoryTest {
     @Autowired
     MemberJpaRepository memberJpaRepository;
 
+    @Autowired
+    MemberRepository memberRepository;
+
     @Test
     void testMember() {
         Member member = new Member("memberName");
@@ -30,14 +33,15 @@ class MemberJpaRepositoryTest {
     }
 
     @Test
-    void findByUsernameAndAgeGreaterThen() {
+    void findByUsernameAndAgeGreaterThan() {
         Member member1 = new Member("AAA", 10);
         Member member2 = new Member("AAA", 20);
 
         memberJpaRepository.save(member1);
         memberJpaRepository.save(member2);
 
-        List<Member> findMembers = memberJpaRepository.findByUsernameAndAgeGreaterThen("AAA", 9);
+        //List<Member> findMembers = memberJpaRepository.findByUsernameAndAgeGreaterThen("AAA", 9);
+        List<Member> findMembers = memberRepository.findByUsernameAndAgeGreaterThan("AAA", 9);
 
         assertThat(findMembers).containsExactly(member1, member2);
     }
