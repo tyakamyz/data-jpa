@@ -45,4 +45,18 @@ class MemberJpaRepositoryTest {
 
         assertThat(findMembers).containsExactly(member1, member2);
     }
+
+    @Test
+    void findUser() {
+        Member member1 = new Member("AAA", 10);
+        Member member2 = new Member("AAA", 20);
+
+        memberJpaRepository.save(member1);
+        memberJpaRepository.save(member2);
+
+        //List<Member> findMembers = memberJpaRepository.findByUsernameAndAgeGreaterThen("AAA", 9);
+        List<Member> findMembers = memberRepository.findUser("AAA", 9);
+
+        assertThat(findMembers).containsExactly(member1, member2);
+    }
 }
